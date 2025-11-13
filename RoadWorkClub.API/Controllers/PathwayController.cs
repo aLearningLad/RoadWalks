@@ -39,7 +39,7 @@ namespace RoadWorkClub.API.Controllers
 
         // get a single pathway by it's ID
         [HttpGet]
-        [Route("{id: Guid}")]
+        [Route("{id:Guid}")]
         public IActionResult GetById([FromRoute]Guid id) {
 
 
@@ -60,6 +60,16 @@ namespace RoadWorkClub.API.Controllers
             // if it doesn't exist, return error code and a short descriptive message
             return NotFound("No pathway with that ID currently exists");
         
+        }
+
+        // update a route via it's ID
+        [HttpPut]
+        [Route("{id:Guid}")]
+        public IActionResult UpdateById([FromRoute]Guid id)
+        {
+
+            var res = rwcdbContext
+            return StatusCode(200); // test this, check it out
         }
     
     

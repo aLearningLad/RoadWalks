@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using RoadWorkClub.API.Data;
 using RoadWorkClub.API.Models.Domain;
+using RoadWorkClub.API.Models.DTOs;
 
 namespace RoadWorkClub.API.Controllers
 {
@@ -17,6 +18,34 @@ namespace RoadWorkClub.API.Controllers
             this.rwcdbContext = rwcdbContext;
         }
 
+
+        // create a pathway
+        [HttpPost]
+        public IActionResult Newpathway(PathwayDto newPath)
+        {
+            if (newPath != null)
+
+                // check for stopover IDs --> add them to stopovers list in domain model later
+
+
+                // check for difficulty rating ID --> look it up and attach to domain model later
+
+
+            {
+                // map all to domain model
+                var dataToDb = new Pathway() {
+                    AvgDuration = newPath.AvgDuration,
+                    Description = newPath.Description,
+                    DifficultyRating = newPath.
+
+                
+                };
+                
+            }
+
+            return Ok(newPath)
+        }
+
         // get all pathways
         [HttpGet]
         public IActionResult GetAll()
@@ -24,6 +53,7 @@ namespace RoadWorkClub.API.Controllers
 
             var allpathways = rwcdbContext.Path.ToList();
 
+            // if I have paths, map to dto & return it
             if(allpathways.Any())
             {
                 return Ok(allpathways);
@@ -68,7 +98,7 @@ namespace RoadWorkClub.API.Controllers
         public IActionResult UpdateById([FromRoute]Guid id)
         {
 
-            var res = rwcdbContext
+            //var res = rwcdbContext
             return StatusCode(200); // test this, check it out
         }
     

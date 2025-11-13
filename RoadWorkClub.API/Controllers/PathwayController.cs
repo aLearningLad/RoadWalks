@@ -1,9 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
+using Microsoft.IdentityModel.Tokens;
 using RoadWorkClub.API.Data;
 using RoadWorkClub.API.Models.Domain;
 using RoadWorkClub.API.Models.DTOs;
+using System.ComponentModel.DataAnnotations;
 
 namespace RoadWorkClub.API.Controllers
 {
@@ -21,29 +24,54 @@ namespace RoadWorkClub.API.Controllers
 
         // create a pathway
         [HttpPost]
-        public IActionResult Newpathway(PathwayDto newPath)
+        public async Task<IActionResult> Newpathway([FromBody]PathwayDto newPath)
         {
             if (newPath != null)
 
-                // check for stopover IDs --> add them to stopovers list in domain model later
-
-
-                // check for difficulty rating ID --> look it up and attach to domain model later
-
-
             {
+                // check for stopover IDs --> add them to stopovers list in domain model later
+                // var stopoverIds = new List<Guid>(newPath.StopoverIds);
+
+
+
+                // compare this to values inside enum --> return error if not correct
+                 var difficulty = newPath.DifficultyRatingValue;
+                if (!Enum.IsDefined(typeof(Enums.Difficulty), difficulty)) { // weird syntax --> I'm checking if my enums file DOES NOT contain this value
+                    return BadRequest("Difficulty rating is invalid. Please consult the Github ReadME");
+                }
+                 
+
+
                 // map all to domain model
                 var dataToDb = new Pathway() {
+                    Name = newPath.Name,
                     AvgDuration = newPath.AvgDuration,
                     Description = newPath.Description,
-                    DifficultyRating = newPath.
-
-                
+                    DifficultyRating = Enum.Parse<Enums.Difficulty>(difficulty), // look inside my enums, fetch the value I want
+                    CreatedAt = DateTime.UtcNow, // standard way to do it
+                    DistanceInKm = newPath.DistanceInKm,
+                    Id = new Guid(Guid.NewGuid().ToString())
                 };
-                
+
+                var res = rwcdbContext.Add(dataToDb);
+
+                try
+                {
+
+               await rwcdbContext.SaveChangesAsync();
+                } catch (DbUpdateException ex)
+                {
+                    return BadRequest(ex.Message);
+                } catch (ValidationException ex)
+                {
+                    return Unauthorized(ex.Message);
+                } catch (Exception ex)
+                {
+                    return BadRequest(ex);
+                }
             }
 
-            return Ok(newPath)
+            return Ok(newPath);
         }
 
         // get all pathways

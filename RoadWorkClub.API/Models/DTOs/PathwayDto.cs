@@ -15,9 +15,9 @@ namespace RoadWorkClub.API.Models.DTOs
         public bool IsLoop { get; set; } // does route start & end at same point??
         public TimeSpan RecommendedStartTime { get; set; }
 
-        public Guid StopoverId { get; set; } // use this to lookip the stopover and attach it to this path's domain model
+        public  List<Guid> StopoverIds { get; set; } // use this to lookip the stopover and attach it to this path's domain model
 
-        public string DifficultyRatingId { get; set; } // same as for stopover ID
+        public string DifficultyRatingValue { get; set; } // same as for stopover ID
        
 
     }

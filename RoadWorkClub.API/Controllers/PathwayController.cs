@@ -30,7 +30,19 @@ namespace RoadWorkClub.API.Controllers
 
             {
                 // check for stopover IDs --> add them to stopovers list in domain model later
-                // var stopoverIds = new List<Guid>(newPath.StopoverIds);
+                 var stopoverIds = new List<Guid>(newPath.StopoverIds);
+
+                    var stopoverNames = new List<Stopover>() { };
+                if (stopoverIds.Any())
+                {
+                    foreach (var eachId in stopoverIds)
+                    {
+                        var stopoverEntry = rwcdbContext.Stopovers.Find(eachId);
+                        if (stopoverEntry != null) {
+                            stopoverNames.Add(stopoverEntry);
+                        }
+                    }
+                }
 
 
 
@@ -50,7 +62,8 @@ namespace RoadWorkClub.API.Controllers
                     DifficultyRating = Enum.Parse<Enums.Difficulty>(difficulty), // look inside my enums, fetch the value I want
                     CreatedAt = DateTime.UtcNow, // standard way to do it
                     DistanceInKm = newPath.DistanceInKm,
-                    Id = new Guid(Guid.NewGuid().ToString())
+                    Id = new Guid(Guid.NewGuid().ToString()),
+                    Stopovers = stopoverNames,
                 };
 
                 var res = rwcdbContext.Add(dataToDb);
@@ -69,9 +82,8 @@ namespace RoadWorkClub.API.Controllers
                 {
                     return BadRequest(ex);
                 }
-            }
-
-            return Ok(newPath);
+            };
+            return Ok(new { data=newPath, message= "New path saved successfully" });
         }
 
         // get all pathways

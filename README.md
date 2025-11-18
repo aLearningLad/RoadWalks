@@ -12,3 +12,7 @@ Written in C#, it uses the repository pattern to decouple Domain models, DTOs an
 | Auth    | JWT via ASP.NET Core Identity (Entity Framework)           |
 | Data Mapping    | AutoMapper with Imapper interface              |
 | Storage   | MS SQL Server             |
+
+
+## 🚀 Getting Started
+### :one: Clone and install

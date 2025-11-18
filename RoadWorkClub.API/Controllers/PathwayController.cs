@@ -132,14 +132,43 @@ namespace RoadWorkClub.API.Controllers
         
         }
 
+
+
         // update a route via it's ID
         [HttpPut]
         [Route("{id:Guid}")]
-        public IActionResult UpdateById([FromRoute]Guid id)
+        public IActionResult UpdateById([FromRoute]Guid id, updatePathwayDto updatePathwayDto)
         {
 
-            //var res = rwcdbContext
-            return StatusCode(200); // test this, check it out
+            // get the pathway from database if it exists
+            var pathwayDomain = rwcdbContext.Path.FirstOrDefault(x => x.Id == id);
+
+            if (pathwayDomain == null)
+            {
+                return NotFound();
+            }
+
+            // update values 
+            pathwayDomain.AvgDuration = updatePathwayDto.AvgDuration;
+            pathwayDomain.Name = updatePathwayDto.Name;
+            pathwayDomain.IsLoop = updatePathwayDto.IsLoop;
+            pathwayDomain.RecommendedStartTime = updatePathwayDto.RecommendedStartTime;
+
+            rwcdbContext.SaveChanges();
+
+            // convert to a dto to return to client with success code
+            var responseDto = new PathwayDto
+            {
+               Name = pathwayDomain.Name,
+               Description = pathwayDomain.Description,
+               AvgDuration = pathwayDomain.AvgDuration,
+               Id = pathwayDomain.Id,
+               RecommendedStartTime = pathwayDomain.RecommendedStartTime,
+               DistanceInKm = pathwayDomain.DistanceInKm,
+               IsLoop = pathwayDomain.IsLoop
+            };
+
+            return Ok(responseDto);
         }
     
     

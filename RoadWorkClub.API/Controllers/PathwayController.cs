@@ -170,7 +170,15 @@ namespace RoadWorkClub.API.Controllers
 
             return Ok(responseDto);
         }
-    
+
+
+
+        // delete a method via it's ID
+        [HttpDelete]
+        [Route("{id: Guid}")]
+        public IActionResult DeleteById([FromRoute] Guid id) { 
+        
+        return Ok()}
     
     }
 }

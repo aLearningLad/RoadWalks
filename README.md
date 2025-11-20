@@ -31,6 +31,12 @@ dotnet restore
 dotnet build
 ```
 
+### :four: Run the API
+```
+dotnet run --project YourApiProjectFolder
+
+```
+
 
 
 

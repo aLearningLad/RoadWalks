@@ -41,6 +41,11 @@ dotnet run --project YourApiProjectFolder
 dotnet run --project YourApiProjectFolder
 ```
 
+## 🍀API Endpoints
+| **Route**          | **Method**             | **Description**  | **Auth** |
+|---------------------|----------------------------|-----------------|----------|
+| ```/api/new_path```    | POST     |       Add a new route. Stopovers are optional (fetch list of stopovers, and then attach the IDs of desired stops for that route        |   :x:       | 
+
 
 
 

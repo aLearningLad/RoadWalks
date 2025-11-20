@@ -176,9 +176,35 @@ namespace RoadWorkClub.API.Controllers
         // delete a method via it's ID
         [HttpDelete]
         [Route("{id: Guid}")]
-        public IActionResult DeleteById([FromRoute] Guid id) { 
-        
-        return Ok()}
+        public async IActionResult DeleteById([FromRoute] Guid id) {
+
+            var toDelete = rwcdbContext.Path.FirstOrDefault(x => x.Id == id);
+
+            if (toDelete == null)
+            {
+                return NotFound();
+            }
+            try
+            {
+                var deletedDto = new PathwayDto()
+                {
+                    Name = toDelete.Name,
+                    Description = toDelete.Description,
+                    AvgDuration = toDelete.AvgDuration,
+                    DifficultyRatingValue = Convert.ToString(toDelete.DifficultyRating),
+                    Id = toDelete.Id,
+                };
+
+
+             rwcdbContext.Path.Remove(toDelete);
+            rwcdbContext.SaveChanges();
+            return Ok(deletedDto); 
+            }      
+            catch (Exception ex)
+            {
+                return BadRequest(ex);
+            }
+        }
     
     }
 }

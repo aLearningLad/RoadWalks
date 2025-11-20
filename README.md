@@ -25,3 +25,13 @@ cd aLearningLad/RoadWalks
 ```
 dotnet restore
 ```
+
+### :three: Build the project
+```
+dotnet build
+```
+
+
+
+
+

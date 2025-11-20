@@ -16,3 +16,7 @@ Written in C#, it uses the repository pattern to decouple Domain models, DTOs an
 
 ## 🚀 Getting Started
 ### :one: Clone and install
+```
+git clone https://github.com/aLearningLad/RoadWalks
+cd aLearningLad/RoadWalks
+```

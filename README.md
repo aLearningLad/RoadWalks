@@ -17,31 +17,28 @@ Written in C#, it uses the repository pattern to decouple Domain models, DTOs an
 ## 🚀 Getting Started
 ### :one: Clone the repository
 ```
-
 git clone https://github.com/aLearningLad/RoadWalks
 cd aLearningLad/RoadWalks
-
 ```
 
 ### :two: Install dependencies
 ```
-
 dotnet restore
-
 ```
 
 ### :three: Build the project
 ```
-
 dotnet build
-
 ```
 
 ### :four: Run the API
 ```
-
 dotnet run --project YourApiProjectFolder
+```
 
+### :five: (Optional) Open in Visual Studio
+```
+dotnet run --project YourApiProjectFolder
 ```
 
 

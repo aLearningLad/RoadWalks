@@ -88,10 +88,10 @@ namespace RoadWorkClub.API.Controllers
 
         // get all pathways
         [HttpGet]
-        public IActionResult GetAll()
+        public async Task<IActionResult> GetAll()
         {
 
-            var allpathways = rwcdbContext.Path.ToList();
+            var allpathways = await rwcdbContext.Path.ToListAsync();
 
             // if I have paths, map to dto & return it
             if(allpathways.Any())

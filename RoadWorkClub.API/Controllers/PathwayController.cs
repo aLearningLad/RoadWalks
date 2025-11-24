@@ -96,12 +96,18 @@ namespace RoadWorkClub.API.Controllers
         {
 
             var allpathways = await pathwayRepository.GetAll();
+            var listOfPaths = new List<PathwayDto>();
 
-            // if I have paths, map to dto & return it
-            if(allpathways.Any())
+            foreach (var pathway in allpathways)
             {
-                return Ok(allpathways);
+                var thisPath = new PathwayDto
+                {
+                    AvgDuration = pathway.AvgDuration,
+                    Description = pathway.Description,
+                };
+                listOfPaths.Add(thisPath);
             }
+            
 
             return Ok("The database is empty, bruv");
         }

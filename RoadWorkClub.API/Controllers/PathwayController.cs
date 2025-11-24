@@ -66,7 +66,7 @@ namespace RoadWorkClub.API.Controllers
                     Stopovers = stopoverNames,
                 };
 
-                var res = rwcdbContext.Add(dataToDb);
+                var res = await rwcdbContext.AddAsync(dataToDb);
 
                 try
                 {
@@ -137,11 +137,11 @@ namespace RoadWorkClub.API.Controllers
         // update a route via it's ID
         [HttpPut]
         [Route("{id:Guid}")]
-        public IActionResult UpdateById([FromRoute]Guid id, updatePathwayDto updatePathwayDto)
+        public async Task<IActionResult> UpdateById([FromRoute]Guid id, updatePathwayDto updatePathwayDto)
         {
 
             // get the pathway from database if it exists
-            var pathwayDomain = rwcdbContext.Path.FirstOrDefault(x => x.Id == id);
+            var pathwayDomain = await rwcdbContext.Path.FirstOrDefaultAsync(x => x.Id == id);
 
             if (pathwayDomain == null)
             {
@@ -154,7 +154,7 @@ namespace RoadWorkClub.API.Controllers
             pathwayDomain.IsLoop = updatePathwayDto.IsLoop;
             pathwayDomain.RecommendedStartTime = updatePathwayDto.RecommendedStartTime;
 
-            rwcdbContext.SaveChanges();
+           await rwcdbContext.SaveChangesAsync();
 
             // convert to a dto to return to client with success code
             var responseDto = new PathwayDto
@@ -176,9 +176,9 @@ namespace RoadWorkClub.API.Controllers
         // delete a method via it's ID
         [HttpDelete]
         [Route("{id: Guid}")]
-        public async IActionResult DeleteById([FromRoute] Guid id) {
+        public async Task<IActionResult> DeleteById([FromRoute] Guid id) {
 
-            var toDelete = rwcdbContext.Path.FirstOrDefault(x => x.Id == id);
+            var toDelete = await rwcdbContext.Path.FirstOrDefaultAsync(x => x.Id == id);
 
             if (toDelete == null)
             {
@@ -197,7 +197,7 @@ namespace RoadWorkClub.API.Controllers
 
 
              rwcdbContext.Path.Remove(toDelete);
-            rwcdbContext.SaveChanges();
+            rwcdbContext.SaveChanges(); // can't make this async bc .Remove is synchronous
             return Ok(deletedDto); 
             }      
             catch (Exception ex)

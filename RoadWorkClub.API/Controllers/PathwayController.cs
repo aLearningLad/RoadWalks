@@ -110,14 +110,14 @@ namespace RoadWorkClub.API.Controllers
         // get a single pathway by it's ID
         [HttpGet]
         [Route("{id:Guid}")]
-        public IActionResult GetById([FromRoute]Guid id) {
+        public async Task<IActionResult> GetById([FromRoute]Guid id) {
 
 
             // get Id from params
             Guid pathwayId = id;
 
             // try getting it from database
-            var res = rwcdbContext.Path.Find(pathwayId);
+            var res = await rwcdbContext.Path.FindAsync(pathwayId);
             
 
 

@@ -4,8 +4,10 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure.Internal;
 using Microsoft.IdentityModel.Tokens;
 using RoadWorkClub.API.Data;
+using RoadWorkClub.API.Interfaces;
 using RoadWorkClub.API.Models.Domain;
 using RoadWorkClub.API.Models.DTOs;
+using RoadWorkClub.API.Repositories;
 using System.ComponentModel.DataAnnotations;
 
 namespace RoadWorkClub.API.Controllers
@@ -15,10 +17,12 @@ namespace RoadWorkClub.API.Controllers
     public class PathwayController : ControllerBase
     {
         private readonly RoadWorkClubDbContext rwcdbContext;
+        private readonly IPathwayRepository pathwayRepository;
 
-        public PathwayController(RoadWorkClubDbContext rwcdbContext)
+        public PathwayController(RoadWorkClubDbContext rwcdbContext, IPathwayRepository pathwayRepository)
         {
             this.rwcdbContext = rwcdbContext;
+            this.pathwayRepository = pathwayRepository;
         }
 
 
@@ -91,7 +95,7 @@ namespace RoadWorkClub.API.Controllers
         public async Task<IActionResult> GetAll()
         {
 
-            var allpathways = await rwcdbContext.Path.ToListAsync();
+            var allpathways = await pathwayRepository.GetAll();
 
             // if I have paths, map to dto & return it
             if(allpathways.Any())
@@ -100,11 +104,6 @@ namespace RoadWorkClub.API.Controllers
             }
 
             return Ok("The database is empty, bruv");
-
-            
-       
-        
-        
         }
 
         // get a single pathway by it's ID

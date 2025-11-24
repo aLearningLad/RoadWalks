@@ -1,9 +1,10 @@
-﻿using RoadWorkClub.API.Models.DTOs;
+﻿using Microsoft.AspNetCore.Mvc;
+using RoadWorkClub.API.Models.DTOs;
 
 namespace RoadWorkClub.API.Interfaces
 {
     public interface IPathwayRepository
     {
-        Task<PathwayDto> GetAll();
+        Task<IActionResult> GetAll();
     }
 }

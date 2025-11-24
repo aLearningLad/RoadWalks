@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using RoadWorkClub.API.Data;
+using RoadWorkClub.API.Interfaces;
+using RoadWorkClub.API.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -10,6 +12,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 builder.Services.AddDbContext<RoadWorkClubDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("RoadWalksConnectionString")));
+builder.Services.AddScoped<IPathwayRepository, PathwayRepository>();
 
 var app = builder.Build();
 

@@ -109,12 +109,12 @@ namespace RoadWorkClub.API.Controllers
             }
             
 
-            return Ok("The database is empty, bruv");
+            return Ok(listOfPaths);
         }
 
         // get a single pathway by it's ID
         [HttpGet]
-        [Route("{id:Guid}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> GetById([FromRoute]Guid id) {
 
 
@@ -141,7 +141,7 @@ namespace RoadWorkClub.API.Controllers
 
         // update a route via it's ID
         [HttpPut]
-        [Route("{id:Guid}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> UpdateById([FromRoute]Guid id, updatePathwayDto updatePathwayDto)
         {
 
@@ -180,7 +180,7 @@ namespace RoadWorkClub.API.Controllers
 
         // delete a method via it's ID
         [HttpDelete]
-        [Route("{id: Guid}")]
+        [Route("{id:guid}")]
         public async Task<IActionResult> DeleteById([FromRoute] Guid id) {
 
             var toDelete = await rwcdbContext.Path.FirstOrDefaultAsync(x => x.Id == id);

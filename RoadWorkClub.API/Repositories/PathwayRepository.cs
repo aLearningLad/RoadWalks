@@ -29,5 +29,16 @@ namespace RoadWorkClub.API.Repositories
 
         }
 
+        public async Task<Stopover?> GetStopover(Guid stopoverId)
+        {
+            var stopover = await dbContext.Stopovers.FindAsync(stopoverId);
+
+            if (stopover == null)
+            {
+                return null;
+            }
+
+            return stopover;
+        }
     } 
     }

@@ -8,6 +8,7 @@ namespace RoadWorkClub.API.Interfaces
     {
         Task<List<Pathway>> GetAll();
 
-        Task<Pathway> Newpathway(PathwayDto pathwayDto);
+        // to fetch stopovers via their IDs
+        Task<Stopover?> GetStopover(Guid stopoverId);
     }
 }

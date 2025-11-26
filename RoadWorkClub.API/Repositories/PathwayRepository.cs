@@ -45,5 +45,10 @@ namespace RoadWorkClub.API.Repositories
         {
             await dbContext.AddAsync(newpath);
         }
+
+        public async Task SavePath()
+        {
+            await dbContext.SaveChangesAsync();
+        }
     } 
     }

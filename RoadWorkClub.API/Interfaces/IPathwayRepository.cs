@@ -12,5 +12,7 @@ namespace RoadWorkClub.API.Interfaces
         Task<Stopover?> GetStopover(Guid stopoverId);
 
         Task AddPathToDb(Pathway newpath);
+
+        Task SavePath();
     }
 }

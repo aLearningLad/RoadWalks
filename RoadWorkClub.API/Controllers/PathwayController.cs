@@ -75,7 +75,7 @@ namespace RoadWorkClub.API.Controllers
                 try
                 {
 
-               await rwcdbContext.SaveChangesAsync();
+                    await pathwayRepository.SavePath();
                 } catch (DbUpdateException ex)
                 {
                     return BadRequest(ex.Message);

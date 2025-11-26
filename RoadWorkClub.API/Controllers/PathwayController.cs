@@ -41,7 +41,7 @@ namespace RoadWorkClub.API.Controllers
                 {
                     foreach (var eachId in stopoverIds)
                     {
-                        var stopoverEntry = rwcdbContext.Stopovers.Find(eachId);
+                        var stopoverEntry = await pathwayRepository.GetStopover(eachId);
                         if (stopoverEntry != null) {
                             stopoverNames.Add(stopoverEntry);
                         }
@@ -70,7 +70,7 @@ namespace RoadWorkClub.API.Controllers
                     Stopovers = stopoverNames,
                 };
 
-                var res = await rwcdbContext.AddAsync(dataToDb);
+                await pathwayRepository.AddPathToDb(dataToDb);
 
                 try
                 {

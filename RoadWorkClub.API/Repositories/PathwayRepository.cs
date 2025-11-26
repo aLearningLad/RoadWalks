@@ -40,5 +40,10 @@ namespace RoadWorkClub.API.Repositories
 
             return stopover;
         }
+
+        public async Task AddPathToDb(Pathway newpath)
+        {
+            await dbContext.AddAsync(newpath);
+        }
     } 
     }

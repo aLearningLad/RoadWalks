@@ -122,7 +122,7 @@ namespace RoadWorkClub.API.Controllers
             Guid pathwayId = id;
 
             // try getting it from database
-            var res = await rwcdbContext.Path.FindAsync(pathwayId);
+            var res = await pathwayRepository.FindPathwayDomain(pathwayId);
             
 
 

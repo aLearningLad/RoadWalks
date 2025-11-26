@@ -29,6 +29,7 @@ namespace RoadWorkClub.API.Controllers
         // create a pathway
         [HttpPost]
         public async Task<IActionResult> Newpathway([FromBody]PathwayDto newPath)
+
         {
             if (newPath != null)
 
@@ -87,7 +88,9 @@ namespace RoadWorkClub.API.Controllers
                     return BadRequest(ex);
                 }
             };
-            return Ok(new { data=newPath, message= "New path saved successfully" });
+            return Ok(new { data=newPath, message= "New path added" });
+
+
         }
 
         // get all pathways

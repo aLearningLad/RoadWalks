@@ -63,5 +63,10 @@ namespace RoadWorkClub.API.Repositories
 
             return res;
         }
+
+        public async Task DeletePath(Pathway pathway )
+        {
+             dbContext.Remove(pathway);
+        }
     } 
     }

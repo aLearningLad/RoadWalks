@@ -201,7 +201,7 @@ namespace RoadWorkClub.API.Controllers
                 };
 
 
-             rwcdbContext.Path.Remove(toDelete);
+                await pathwayRepository.DeletePath(toDelete);
             rwcdbContext.SaveChanges(); // can't make this async bc .Remove is synchronous
             return Ok(deletedDto); 
             }      

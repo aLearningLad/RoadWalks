@@ -16,5 +16,7 @@ namespace RoadWorkClub.API.Interfaces
         Task SavePath();
 
         Task<Pathway?> FindPathwayDomain(Guid id);
+
+        Task DeletePath(Pathway);
     }
 }

@@ -7,5 +7,7 @@ namespace RoadWorkClub.API.Interfaces
     public interface IPathwayRepository
     {
         Task<List<Pathway>> GetAll();
+
+        Task<Pathway> Newpathway(PathwayDto pathwayDto);
     }
 }

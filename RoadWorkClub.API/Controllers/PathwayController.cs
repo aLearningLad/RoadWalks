@@ -146,7 +146,7 @@ namespace RoadWorkClub.API.Controllers
         {
 
             // get the pathway from database if it exists
-            var pathwayDomain = await rwcdbContext.Path.FirstOrDefaultAsync(x => x.Id == id);
+            var pathwayDomain = await pathwayRepository.FindPathwayDomain(id);
 
             if (pathwayDomain == null)
             {

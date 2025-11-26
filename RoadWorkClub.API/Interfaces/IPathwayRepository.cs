@@ -15,6 +15,6 @@ namespace RoadWorkClub.API.Interfaces
 
         Task SavePath();
 
-        Task FindPathwayDomain(Guid id);
+        Task<Pathway?> FindPathwayDomain(Guid id);
     }
 }

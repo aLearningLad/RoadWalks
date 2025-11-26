@@ -159,7 +159,7 @@ namespace RoadWorkClub.API.Controllers
             pathwayDomain.IsLoop = updatePathwayDto.IsLoop;
             pathwayDomain.RecommendedStartTime = updatePathwayDto.RecommendedStartTime;
 
-           await rwcdbContext.SaveChangesAsync();
+            await pathwayRepository.SavePath();
 
             // convert to a dto to return to client with success code
             var responseDto = new PathwayDto
@@ -183,7 +183,7 @@ namespace RoadWorkClub.API.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteById([FromRoute] Guid id) {
 
-            var toDelete = await rwcdbContext.Path.FirstOrDefaultAsync(x => x.Id == id);
+            var toDelete = await pathwayRepository.FindPathwayDomain(id);
 
             if (toDelete == null)
             {

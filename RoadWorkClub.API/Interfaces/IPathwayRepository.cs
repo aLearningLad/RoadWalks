@@ -14,5 +14,7 @@ namespace RoadWorkClub.API.Interfaces
         Task AddPathToDb(Pathway newpath);
 
         Task SavePath();
+
+        Task FindPathwayDomain(Guid id);
     }
 }

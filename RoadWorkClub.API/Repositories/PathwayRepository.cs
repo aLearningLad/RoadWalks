@@ -50,5 +50,10 @@ namespace RoadWorkClub.API.Repositories
         {
             await dbContext.SaveChangesAsync();
         }
+
+        public async Task FindPathwayDomain(Guid id)
+        {
+           var res = await dbContext.Path.FirstOrDefaultAsync((x) =>  x.Id == id);
+        }
     } 
     }

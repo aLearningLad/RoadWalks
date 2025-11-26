@@ -90,23 +90,6 @@ namespace RoadWorkClub.API.Controllers
             return Ok(new { data=newPath, message= "New path saved successfully" });
         }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         // get all pathways
         [HttpGet]
         public async Task<IActionResult> GetAll()
